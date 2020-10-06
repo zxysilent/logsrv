@@ -21,10 +21,10 @@ var (
 	queue  chan Node  //缓冲队列
 	task   *cron.Cron //
 	global struct {
-		Rows   int64 `json:"rows"` //
-		Size   int64 `json:"size"` //
-		SizeMB int64 `json:"size_mb"`
-		SizeGB int64 `json:"size_gb"`
+		Rows   int64   `json:"rows"` //
+		Size   int64   `json:"size"` //
+		SizeMB float64 `json:"size_mb"`
+		SizeGB float64 `json:"size_gb"`
 	}
 	lock = &sync.Mutex{}
 )
@@ -108,7 +108,7 @@ func RunHttp() {
 		w.Write([]byte(time.Now().Format("Server time => 2006-01-02 15:04:05")))
 	})
 	http.HandleFunc("/api/global", func(w http.ResponseWriter, r *http.Request) {
-		global.SizeMB = global.Size / (1024 * 1024)
+		global.SizeMB = float64(global.Size) / (1024 * 1024)
 		global.SizeGB = global.SizeMB / 1024
 		jbuf, _ := json.Marshal(global)
 		w.Write(jbuf)
