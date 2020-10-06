@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/zxysilent/logs"
-	"github.com/zxysilent/utils"
 )
 
 // FileWriter doc
@@ -98,7 +97,7 @@ func (fw *FileWriter) Rotate() error {
 		fw.file.Sync()
 		fw.file.Close()
 		// 保存
-		fbak := filepath.Join(fw.fname + ".part" + part + "." + utils.RandStr(6) + fw.fsuffix)
+		fbak := filepath.Join(fw.fname + ".part." + part + fw.fsuffix)
 		os.Rename(fw.fpath, fbak)
 	}
 	// 新建
