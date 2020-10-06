@@ -1,0 +1,9 @@
+docs/*
+logs/*
+archives/*
+static/dist/*
+static/upload/*
+logsrv
+logs/*
+*.exe
+*.exe~

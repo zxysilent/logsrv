@@ -1,0 +1,17 @@
+
+title = "blog"
+intro = "zxysilent个人blog"
+# UDP
+upd_port = 514
+# http
+http_srv = "http://127.0.0.1:8085"
+# 根目录
+root_dir = "./archives"
+# 文件后缀名
+file_ext = ".tar.gz"
+# KB
+buf_size = 512
+# 每n个进行保存
+split_sync = 10000
+# 每nMB分割文件
+split_file= 1
