@@ -1,10 +1,11 @@
 
-title = "blog"
-intro = "zxysilent个人blog"
+title = "syslog"
+intro = "syslog server"
 # UDP
 upd_port = 514
 # http
-http_srv = "http://127.0.0.1:8085"
+http_port = 80
+http_srv = "http://127.0.0.1:80"
 # 根目录
 root_dir = "./archives"
 # 文件后缀名

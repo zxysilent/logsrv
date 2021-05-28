@@ -9,6 +9,7 @@ type appconf struct {
 	Title     string `toml:"title"`
 	Intro     string `toml:"intro"`
 	UdpPort   int    `toml:"upd_port"`
+	HttpPort  int    `toml:"http_port"`
 	HttpSrv   string `toml:"http_srv"`
 	RootDir   string `toml:"root_dir"`
 	FileExt   string `toml:"file_ext"`

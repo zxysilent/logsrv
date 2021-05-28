@@ -12,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/robfig/cron"
+	"github.com/robfig/cron/v3"
 	"github.com/zxysilent/logs"
 )
 
@@ -117,8 +117,10 @@ func RunHttp() {
 		jbuf, _ := json.Marshal(app)
 		w.Write(jbuf)
 	})
-	logs.Info("ListenHTTP on ", "[::]:80")
-	err := http.ListenAndServe(":80", nil)
+
+	addr := net.TCPAddr{IP: net.ParseIP("0.0.0.0"), Port: conf.App.HttpPort}
+	logs.Info("ListenHTTP on ", addr.String())
+	err := http.ListenAndServe(addr.String(), nil)
 	if err != nil {
 		logs.Fatal("HTTP 监听失败!", err.Error())
 	}
