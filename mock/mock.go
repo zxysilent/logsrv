@@ -4,12 +4,19 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"os"
 	"time"
 )
 
 func main() {
 	// dstAddr := &net.UDPAddr{IP: net.ParseIP("127.0.0.1"), Port: 514}
-	dstAddr := &net.UDPAddr{IP: net.ParseIP("192.168.149.131"), Port: 514}
+	if len(os.Args) != 2 {
+		log.Println("usage mock 127.0.0.1")
+		return
+	}
+	dstAddr := &net.UDPAddr{IP: net.ParseIP(os.Args[1]), Port: 514}
+	log.Println(dstAddr.String())
+	time.Sleep(5 * time.Second)
 	conn, err := net.ListenUDP("udp", nil)
 	if err != nil {
 		fmt.Println(err)
