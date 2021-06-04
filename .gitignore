@@ -7,3 +7,4 @@ logsrv
 logs/*
 *.exe
 *.exe~
+release/**
