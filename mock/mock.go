@@ -1,26 +1,38 @@
 package main
 
 import (
-	"fmt"
+	"flag"
 	"log"
 	"net"
+	"os"
 	"time"
 )
 
+var host string
+var port int
+
+func init() {
+	flag.StringVar(&host, "h", "127.0.0.1", "-h host")
+	flag.IntVar(&port, "p", 514, "-p port")
+}
 func main() {
-	// dstAddr := &net.UDPAddr{IP: net.ParseIP("127.0.0.1"), Port: 514}
-	dstAddr := &net.UDPAddr{IP: net.ParseIP("192.168.149.131"), Port: 514}
+	flag.Parse()
+	if len(os.Args) > 1 && os.Args[1] == "help" {
+		flag.Usage()
+		return
+	}
+	dstAddr := &net.UDPAddr{IP: net.ParseIP(host), Port: port}
+	log.Println("send to :", dstAddr.String())
+	time.Sleep(time.Second * 3)
 	conn, err := net.ListenUDP("udp", nil)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	for {
-		conn.Write([]byte("hello"))
-		fmt.Println(conn.RemoteAddr())
-		time.Sleep(time.Millisecond * 5)
+		time.Sleep(time.Second * 1)
 		// 发送数据
 		conn.WriteToUDP([]byte("<132> test log warn test log warn test log warn test log warn"), dstAddr)
 		ln, err := conn.WriteToUDP([]byte("<134> test log info test log info test log info test log info"), dstAddr)
-		log.Println(ln, err)
+		log.Println("send msg err:", err, ",length:", ln)
 	}
 }
