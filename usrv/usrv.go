@@ -164,12 +164,17 @@ func RunUdp() {
 
 func solve() {
 	for node := range queue { //等待关闭、并且数据为空
-		e := strings.IndexByte(node.Msg, '>')
-		if e < 1 {
-			continue
+		idx := strings.IndexByte(node.Msg, '>')
+		// 找到
+		if idx > 1 && idx < 10 {
+			pri, _ := strconv.Atoi(string(node.Msg[1:idx]))
+			key := node.Addr + "." + Level[pri%8]
+			Write(key, node.Msg)
+		} else {
+			if conf.App.SaveUnknow {
+				key := node.Addr + "." + "unknow"
+				Write(key, node.Msg)
+			}
 		}
-		pri, _ := strconv.Atoi(string(node.Msg[1:e]))
-		key := node.Addr + "." + Level[pri%8]
-		Write(key, node.Msg)
 	}
 }

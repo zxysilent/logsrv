@@ -16,3 +16,5 @@ buf_size = 512
 split_sync = 10000
 # 每nMB分割文件
 split_file= 1
+# 
+save_unknow = true
