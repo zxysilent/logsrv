@@ -1,0 +1,34 @@
+title = "vm"
+intro = "虚拟机"
+# dev prod
+mode  = "dev"
+addr  = ":8085"
+srv   = "http://127.0.0.1:8085"
+
+# vm_ip     = "10.1.13.62"
+# vm_user   = "administrator@vsphere.local"
+# vm_passwd = "WlzxCrh!180504"
+# vm_dc     = "/hpe-hc-dc"
+
+vm_ip     = "10.1.13.10"
+vm_user   = "administrator"
+vm_passwd = "Yrhhcm2qx$"
+vm_dc     = "/CWNU"
+#  需要备份的虚拟机
+vm_vms    = [
+"D（32）ops-zypg",
+"D（44）ops-gzxt", 
+"D（42）www-syzx", 
+"D（18）www-dfwx", 
+"D（224）192（21）ops-zq1",
+"D（225）ops-zq2", 
+"D（226）ops-zq3", 
+"D（227）ops-zq4",
+"D（228）ops-zq5"]
+# 备份的后缀名 + 日期yyyyMMdd
+#  循环
+# _autoc_
+# _aclone_
+vm_new_suffix = "_autoc_"
+# 需要删除的 关键词
+vm_rm_key  = "_aclone_"
