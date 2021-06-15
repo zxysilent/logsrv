@@ -1,6 +1,7 @@
 package usrv
 
 import (
+	"embed"
 	"encoding/json"
 	"io/ioutil"
 	"logsrv/conf"
@@ -103,7 +104,8 @@ func Rotate() {
 var Level = []string{"emergency", "alert", "critical", "error", "warning", "notice", "informational", "debug"}
 var app applet
 
-func RunHttp() {
+func RunHttp(static embed.FS) {
+	http.Handle("/static/", http.FileServer(http.FS(static)))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(time.Now().Format("Server time => 2006-01-02 15:04:05")))
 	})
